@@ -5,7 +5,7 @@ const int ERR_ROW = 15;
 
 StudentClass::StudentClass() {
     record_num = 0;
-    filename = "fstudents.dat";
+    filename = "students.dat";
     studf = open64(filename.c_str(),O_RDWR | O_CREAT, 0755);
 }
 StudentClass::~StudentClass() {
