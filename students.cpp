@@ -101,6 +101,7 @@ void StudentFile::list() {
         mvaddstr(4,10,"Grade: ");
         mvgetstr(3,25,lname);
         mvgetstr(4,25,grade);
+        mvaddstr(6,0,"");
         stf.goTop();
         while (stf.readRow(stm)) {
             if (strcasestr(stm.lname,lname) != nullptr && strcasestr(stm.grade,grade) != nullptr) {
