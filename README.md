@@ -21,6 +21,12 @@ make
 ```
 ./main
 ```
+
+### Listing records
+
+To filter records, enter values for `Last name` and/or `Grade` search fields.
+Leave blank to show all
+
 ### Screen shots
 - [FileIO Main Screen](./screenshots/fileio_demo.png)
 - [Data List Screen](./screenshots/fileio_list.png)
