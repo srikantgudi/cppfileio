@@ -7,7 +7,7 @@ using namespace std;
 
 StudentFile::StudentFile() {
     filename = "students.dat";
-    f = open(filename.c_str(), O_RDWR | O_CREAT);
+    f = open(filename.c_str(), O_RDWR | O_CREAT, 0755);
 }
 StudentFile::~StudentFile() {
     close(f);
