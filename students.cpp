@@ -44,21 +44,20 @@ void StudentFile::writeNew(const StudentModel& s) {
 
 bool StudentFile::input(StudentModel & s) {
     char idnum[20];
-    clear();
     s = newId();
-    mvprintw(4, 5, "ID: %d", s.id);
-    mvaddstr(5,5, "First Name: ");
-    mvgetnstr(5,20, s.fname, sizeof(s.fname));
+    mvprintw(4,10, "ID: %d", s.id);
+    mvaddstr(5,10, "First Name: ");
+    mvgetnstr(5,30, s.fname, sizeof(s.fname));
     if (!strlen(s.fname)) return false;
-    mvaddstr(6,5, "Last Name: ");
-    mvgetnstr(6,20,s.lname, sizeof(s.lname));
+    mvaddstr(6,10, "Last Name: ");
+    mvgetnstr(6,30,s.lname, sizeof(s.lname));
     if (!strlen(s.lname)) return false;
     if (isExisting(s, "name")) {
         mvaddstr(getcury(stdscr)-1, 40,"Duplicate name");
         return false;
     }
-    mvaddstr(7,5, "Grade: ");
-    mvgetnstr(7,20, s.grade, sizeof(s.grade));
+    mvaddstr(7,10, "Grade: ");
+    mvgetnstr(7,30, s.grade, sizeof(s.grade));
     if (!strlen(s.grade)) return false;
     mvaddstr(getcury(stdscr)+2, 10, "a) Add | c) Cancel");
     int ok = getch();

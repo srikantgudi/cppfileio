@@ -15,9 +15,11 @@ int main() {
     do {
         clear();
         mvaddstr(1, 10, "Data management System");
-        mvprintw(3, 10, "n) New row | l) List | q) Quit");
+        mvprintw(3, 10, "n) New row | l) List | q) Quit ? ");
         opt = getch();
         if (opt == 'n') {
+            clear();
+            mvaddstr(2,20,"Add new data");
             if (stf.input(stm)) {
                 mvprintw(getcury(stdscr)+2, 10, "%d %s %s %s", stm.id, stm.fname, stm.lname, stm.grade);
                 stf.writeNew(stm);
@@ -27,11 +29,12 @@ int main() {
         } else if (opt == 'l') {
             clear();
             stf.goTop();
-            addstr("\n\nData list\n\n");
+            mvaddstr(1,10,"Data list");
+            mvaddstr(3,0,"");
             while (stf.readRow(stm)) {
                 printw("%8d %-30s %-30s %-10s\n", stm.id, stm.fname, stm.lname, stm.grade);
             }
-            addstr("\nPress a key to continue...");
+            mvaddstr(getcury(stdscr)+2,10,"Press a key to continue...");
             getch();
         }
     } while (opt != 'q');
