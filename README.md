@@ -29,6 +29,6 @@ Leave blank to show all
 
 ### Screen shots
 - [FileIO Main Screen](./screenshots/fileio_demo.png)
-- [Data List Screen](./screenshots/data_list.png)
-- [Data List filtered](./screenshots/data_list_filtered.png)
 - [New Data Screen](./screenshots/fileio_newdata.png)
+- [Data List - All records](./screenshots/data_list_all.png)
+- [Data List - filtered](./screenshots/data_list_filtered.png)
