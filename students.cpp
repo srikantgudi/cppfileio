@@ -83,3 +83,31 @@ bool StudentFile::isExisting(const StudentModel& s, string what) {
     }
     return found;
 }
+void StudentFile::list() {
+    StudentFile stf;
+    StudentModel stm;
+    int opt;
+    bool filtered = false;
+    char lname[30] {" "};
+    char grade[10] {" "};
+    
+    while (opt != 'q') {
+        clear();
+        attron(A_REVERSE|A_BOLD);
+        mvaddstr(1,10,"Data list");
+        attroff(A_REVERSE|A_BOLD);
+        mvaddstr(2,10,"Filter: Leave both the fields blank for all");
+        mvaddstr(3,10,"Last name: ");
+        mvaddstr(4,10,"Grade: ");
+        mvgetstr(3,25,lname);
+        mvgetstr(4,25,grade);
+        stf.goTop();
+        while (stf.readRow(stm)) {
+            if (strcasestr(stm.lname,lname) != nullptr && strcasestr(stm.grade,grade) != nullptr) {
+                printw("%8d %-30s %-30s %-10s\n", stm.id, stm.fname, stm.lname, stm.grade);
+            }
+        }
+        mvaddstr(getcury(stdscr)+2,10,"Press a key to continue...(q) to Quit");
+        opt = getch();
+    }
+}

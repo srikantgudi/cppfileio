@@ -47,6 +47,7 @@ public:
     void writeNew(const StudentModel& s);
     bool input(StudentModel & s);
     bool isExisting(const StudentModel& s, string = "id");
+    void list();
 };
 
 #endif

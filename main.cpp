@@ -28,14 +28,7 @@ int main() {
             }
         } else if (opt == 'l') {
             clear();
-            stf.goTop();
-            mvaddstr(1,10,"Data list");
-            mvaddstr(3,0,"");
-            while (stf.readRow(stm)) {
-                printw("%8d %-30s %-30s %-10s\n", stm.id, stm.fname, stm.lname, stm.grade);
-            }
-            mvaddstr(getcury(stdscr)+2,10,"Press a key to continue...");
-            getch();
+            stf.list();
         }
     } while (opt != 'q');
     endwin();
