@@ -1,26 +1,40 @@
+#include <cstdio>
 #include <iostream>
+#include <ncurses.h>
 #include "students.h"
 
 using namespace std;
 
 int main() {
     initscr();
-    int mainOpt = 0;
+    refresh();
+    keypad(stdscr, true);
+    int opt = '?';
+    StudentFile stf;
+    StudentModel stm;
     do {
         clear();
-        attron(A_REVERSE);
-        mvaddstr(2,20,"FILE I/O Demo App");
-        attroff(A_REVERSE);
-        mvaddstr(4,20, "s. Students Management");
-        mvaddstr(6,20, "q. Quit");
-        mvaddstr(8,20, "? ");
-        mainOpt = getch();
-        if (mainOpt == 's') {
-            StudentClass studentObj;
-            studentObj.menu();
+        mvaddstr(1, 10, "Data management System");
+        mvprintw(3, 10, "n) New row | l) List | q) Quit");
+        opt = getch();
+        if (opt == 'n') {
+            if (stf.input(stm)) {
+                mvprintw(getcury(stdscr)+2, 10, "%d %s %s %s", stm.id, stm.fname, stm.lname, stm.grade);
+                stf.writeNew(stm);
+            } else {
+                mvprintw(getcury(stdscr)+2, 10, "Incomplete data");
+            }
+        } else if (opt == 'l') {
+            clear();
+            stf.goTop();
+            addstr("\n\nData list\n\n");
+            while (stf.readRow(stm)) {
+                printw("%8d %-30s %-30s %-10s\n", stm.id, stm.fname, stm.lname, stm.grade);
+            }
+            addstr("\nPress a key to continue...");
+            getch();
         }
-    } while (mainOpt != 'q');
-    refresh();
+    } while (opt != 'q');
     endwin();
     return 0;
 }

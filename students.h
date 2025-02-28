@@ -4,7 +4,8 @@
 #include <iostream>
 #include <fcntl.h>
 #include <unistd.h>
-#include <string.h>
+#include <string>
+#include <cstring>
 #include <ncurses.h>
 
 using namespace std;
@@ -14,29 +15,38 @@ const int RECORD_EXISTS = 1;
 const int RECORD_INVALID = 2;
 const int RECORD_DUP_NAME = 3;
 
-struct StudentRecord {
-    int rollno;
+struct StudentModel {
+    int id;
     char fname[30];
     char lname[30];
     char grade[10];
+
+    string fullname() {
+        string n = "";
+        n.append(fname);
+        n.append(" ");
+        n.append(lname);
+        return n;
+    }
 };
 
-class StudentClass {
-    StudentRecord student;
-    int studf;
+class StudentFile {
+    StudentModel studentRec;
     string filename;
-    long record_num;
+    long recno;
+    int f;
 public:
-    StudentClass();
-    ~StudentClass();
-    int input(StudentRecord &s);
-    void addRecord();
-    bool isExisting(const StudentRecord & s, const string & str);
-    void writeToFile(const StudentRecord & s);
-    void rewind();
-    long readFromFile(StudentRecord & s);
-    void showList();
-    void filterList();
-    void menu();
+    StudentFile();
+    ~StudentFile();
+    long reccount();
+    long recsize();
+    void goTop();
+    StudentModel newId();
+    void goRec(long _recno);
+    long readRow(StudentModel& s);
+    void writeNew(const StudentModel& s);
+    bool input(StudentModel & s);
+    bool isExisting(const StudentModel& s, string = "id");
 };
+
 #endif
