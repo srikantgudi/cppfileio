@@ -44,16 +44,36 @@ void StudentFile::writeNew(const StudentModel& s) {
 
 bool StudentFile::input(StudentModel & s) {
     char idnum[20];
-    s = newId();
-    mvprintw(4,10, "ID: %d", s.id);
+    mvprintw(4,10, "ID: ");
+    mvgetnstr(4,30,idnum,20);
+    if (!strlen(idnum)) {
+        mvaddstr(getcury(stdscr)-1, 40,"ID id mandatory");
+        getch();
+        return false; // if left blank
+    }
+    s.id = stoi(idnum);
+    if (!s.id) {
+        mvaddstr(getcury(stdscr)-1, 40,"ID cannot be Zero");
+        getch();
+        return false; // if 0 entered
+    }
+    if (isExisting(s,"id")) {
+        mvaddstr(getcury(stdscr)-1, 40,"Duplicate ID");
+        getch();
+        return false;
+    }
     mvaddstr(5,10, "First Name: ");
     mvgetnstr(5,30, s.fname, sizeof(s.fname));
-    if (!strlen(s.fname)) return false;
     mvaddstr(6,10, "Last Name: ");
     mvgetnstr(6,30,s.lname, sizeof(s.lname));
-    if (!strlen(s.lname)) return false;
+    if (!strlen(s.fname) || !strlen(s.lname)) {
+        mvaddstr(getcury(stdscr)+1, 20,"First name | Last name not entered!");
+        getch();
+        return false;
+    }
     if (isExisting(s, "name")) {
         mvaddstr(getcury(stdscr)-1, 40,"Duplicate name");
+        getch();
         return false;
     }
     mvaddstr(7,10, "Grade: ");
