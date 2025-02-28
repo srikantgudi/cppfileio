@@ -21,3 +21,7 @@ make
 ```
 ./main
 ```
+### Screen shots
+- [FileIO Main Screen](./screenshots/fileio_demo.png)
+- [Data List Screen](./screenshots/fileio_list.png)
+- [New Data Screen](./screenshots/fileio_newdata.png)
